@@ -1,0 +1,40 @@
+airbnb = sqlContext.sql("""
+SELECT 
+    CAST(id as INT) AS                          id, 
+    CAST(host_id as INT) AS                     host_id, 
+    CAST(host_response_rate AS INT) AS          host_response_rate, 
+    CAST(host_acceptance_rate AS INT) AS        host_acceptance_rate, 
+    CAST(host_listings_count AS INT) AS         host_listings_count,
+    CAST(host_total_listings_count AS INT) AS   host_total_listings_count, 
+    CAST(latitude AS FLOAT) AS                  latitude, 
+    CAST(longitude AS FLOAT) AS                 longitude,
+    CAST(accommodates AS INT) AS                accommodates,
+    CAST(bathrooms AS FLOAT) AS                 bathrooms,
+    CAST(beds AS INT) AS                        beds,
+    CAST(minimum_nights AS INT) AS              minimum_nights,
+    CAST(maximum_nights AS INT) AS              maximum_nights,
+    CAST(availability_365 AS INT) AS            availability_365,
+    CAST(number_of_reviews AS INT) AS           number_of_reviews,
+    CAST(first_review AS DATE) AS               first_review,
+    CAST(last_review AS DATE) AS                last_review,
+    CAST(review_scores_rating AS INT) AS        review_scores_rating,
+    CAST(review_scores_accuracy AS INT) AS      review_scores_accuracy,
+    CAST(review_scores_cleanliness AS INT) AS   review_scores_cleanliness,
+    CAST(review_scores_checkin AS INT) AS       review_scores_checkin,
+    CAST(review_scores_communication AS INT) AS review_scores_communication,
+    CAST(review_scores_location	AS INT) AS      review_scores_location,
+    CAST(review_scores_value AS INT) AS         review_scores_value,
+    CAST(reviews_per_month AS FLOAT) AS         reviews_per_month,
+    CAST(price AS INT) AS                       price,
+    CAST(weekly_price AS INT) AS                weekly_price,
+    CAST(monthly_price AS INT) AS               monthly_price,
+    CAST(security_deposit AS INT) AS            security_deposit,
+    CAST(cleaning_fee AS INT) AS                cleaning_fee,
+    CAST(guests_included AS INT) AS             guests_included,
+    CAST(extra_people AS INT) AS                extra_people,
+    host_response_time, host_is_superhost, host_neighbourhood, host_identity_verified, neighbourhood, property_type, room_type, bed_type, instant_bookable,
+    cancellation_policy, require_guest_profile_picture, require_guest_phone_verification
+FROM airbnb
+""")
+airbnb.registerTempTable("sf")
+airbnb.show(1)
