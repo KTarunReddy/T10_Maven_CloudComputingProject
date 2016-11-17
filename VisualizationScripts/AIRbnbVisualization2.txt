@@ -1,0 +1,19 @@
+%sql
+-- THIS QUERY GRABS Average prices grouped by the amount of people they can accommodate
+
+WITH subquery AS(
+    SELECT AVG(price) PRICE, neighbourhood, beds, COUNT(1) AS cnt
+    FROM sf
+    WHERE beds <= ${max_accommodations=4}
+     AND price < 1000
+    GROUP BY neighbourhood, beds
+)
+SELECT * 
+FROM subquery q2
+INNER JOIN (
+    SELECT DISTINCT(neighbourhood)
+    FROM subquery q1
+    WHERE q1.cnt > ${min_count_of_listings=50}
+) AS distinct_neigh
+ON distinct_neigh.neighbourhood = q2.neighbourhood
+WHERE cnt > 15

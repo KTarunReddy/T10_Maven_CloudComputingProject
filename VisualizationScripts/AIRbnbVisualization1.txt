@@ -1,0 +1,5 @@
+%sql
+SELECT AVG(host_acceptance_rate) avg_acceptance, neighbourhood
+FROM sf
+GROUP BY neighbourhood
+ORDER BY 1 DESC
